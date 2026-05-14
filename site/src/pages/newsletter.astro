@@ -4,38 +4,24 @@ import Layout from "~/layouts/Layout.astro";
 
 <Layout
   title="Newsletter"
-  description="Get new Undoverfit posts in your inbox."
+  description="The Undoverfit newsletter is coming. In the meantime, the RSS feed has everything."
 >
   <section class="mx-auto w-full max-w-prose px-5">
     <h1 class="font-serif text-3xl">Newsletter</h1>
-    <p class="mt-3 text-muted-light dark:text-muted-dark">
-      New posts in your inbox. No tracking, no ads, unsubscribe anytime.
+    <p class="mt-4 text-muted-light dark:text-muted-dark">
+      I am still figuring out the right way to send these without leaning on
+      a service that tracks readers. Until I have something I'm happy with,
+      the calmest way to follow along is the <a href="/rss.xml">RSS feed</a>.
     </p>
-
-    <div class="mt-10">
-      <!-- BEEHIIV_EMBED_PLACEHOLDER -->
-      <form
-        action="https://example.com/newsletter"
-        method="post"
-        class="flex flex-col gap-3 sm:flex-row sm:items-center"
+    <p class="mt-4 text-muted-light dark:text-muted-dark">
+      If you would rather be pinged personally when the email version is
+      live, write me at
+      <a
+        href="mailto:vadale93@gmail.com?subject=undoverfit%20newsletter"
+        >vadale93@gmail.com</a
       >
-        <input
-          type="email"
-          name="email"
-          required
-          placeholder="you@example.com"
-          class="flex-1 bg-transparent border-b border-rule-light dark:border-rule-dark py-2 outline-none focus:border-accent-navy dark:focus:border-accent-gold"
-        />
-        <button
-          type="submit"
-          class="self-start sm:self-auto border border-rule-light dark:border-rule-dark px-4 py-2 text-sm hover:border-accent-navy dark:hover:border-accent-gold transition-colors"
-        >
-          Subscribe
-        </button>
-      </form>
-      <p class="mt-3 text-xs text-muted-light dark:text-muted-dark">
-        Placeholder form. Replace with Beehiiv embed once configured.
-      </p>
-    </div>
+      with the subject line "undoverfit newsletter" and I will put you on a
+      short manual list.
+    </p>
   </section>
 </Layout>
