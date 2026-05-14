@@ -9,6 +9,7 @@ import {
   tagSlug,
   type Post,
 } from "~/lib/posts";
+import { SITE } from "~/lib/site";
 import { render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -37,6 +38,29 @@ const { prev, next } = await getAdjacent(post);
   image={`/og/${n}.png`}
   pubDate={post.data.pubDate}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.data.title,
+      "description": post.data.description,
+      "datePublished": post.data.pubDate.toISOString(),
+      "url": `${SITE.url}/${n}`,
+      "image": `${SITE.url}/og/${n}.png`,
+      "author": { "@type": "Person", "name": SITE.author, "url": `${SITE.url}/about` },
+      "publisher": { "@type": "Person", "name": SITE.author },
+      "mainEntityOfPage": `${SITE.url}/${n}`,
+      "inLanguage": SITE.language,
+      "keywords": post.data.tags.join(", ")
+    })}
+  />
+  <meta slot="head" property="article:author" content={SITE.author} />
+  {post.data.tags.map((t) => (
+    <meta slot="head" property="article:tag" content={t} />
+  ))}
+
   <article class="mx-auto w-full max-w-prose px-5" data-pagefind-body>
     <header class="mb-8">
       <h1 class="font-serif text-3xl leading-tight sm:text-4xl">

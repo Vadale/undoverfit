@@ -46,11 +46,21 @@
       const a = t.closest("a, button");
       if (!a) return;
       if (a.id === "theme-toggle") {
-        tone({ freq: 520, duration: 0.05, gain: 0.05, type: "triangle" });
+        // Soft two-tone perfect-fifth chord (A5 + E6)
+        tone({ freq: 1760, duration: 0.12, gain: 0.04, type: "sine" });
+        tone({ freq: 2640, duration: 0.12, gain: 0.025, type: "sine" });
       } else if (a.tagName === "BUTTON") {
-        tone({ freq: 700, duration: 0.04, gain: 0.04 });
+        // Soft thud for generic buttons
+        tone({ freq: 220, duration: 0.07, gain: 0.05, type: "triangle" });
+      } else if (a.closest("header") !== null) {
+        // Warmer tick for nav links inside <header>
+        tone({ freq: 980, duration: 0.025, gain: 0.04, type: "triangle" });
+      } else if (a.getAttribute("href") && a.getAttribute("href").startsWith("/tags/")) {
+        // Softer sine for tag links
+        tone({ freq: 1100, duration: 0.022, gain: 0.035, type: "sine" });
       } else {
-        tone({ freq: 880, duration: 0.025, gain: 0.035 });
+        // Paper tick for generic links (post body, indice, search, footer)
+        tone({ freq: 1400, duration: 0.018, gain: 0.04, type: "sine" });
       }
     };
 
