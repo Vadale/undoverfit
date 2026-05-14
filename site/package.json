@@ -1,0 +1,30 @@
+{
+  "name": "undoverfit",
+  "version": "0.1.0",
+  "description": "Undoverfit — Signal, noise, and everything in between",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "postbuild": "pagefind --site dist",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^5.18.1",
+    "pagefind": "^1.5.2",
+    "satori": "^0.11.2",
+    "satori-html": "^0.3.2",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/typography": "^0.5.16",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.8.3"
+  }
+}

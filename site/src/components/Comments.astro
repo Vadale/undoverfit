@@ -1,0 +1,58 @@
+---
+// Giscus comments. Theme switches with site theme.
+// Replace placeholders after creating the GitHub repo and configuring giscus.app.
+---
+
+<section class="mx-auto w-full max-w-prose px-5 pt-12">
+  <hr class="!my-0 !w-full" />
+  <h2 class="mt-10 font-serif text-base font-medium text-muted-light dark:text-muted-dark">
+    Comments
+  </h2>
+  <div id="giscus-container" class="mt-4"></div>
+</section>
+
+<script is:inline>
+  (() => {
+    const mount = () => {
+      const container = document.getElementById("giscus-container");
+      if (!container || container.dataset.mounted === "1") return;
+      container.dataset.mounted = "1";
+      const isDark = document.documentElement.classList.contains("dark");
+      const s = document.createElement("script");
+      s.src = "https://giscus.app/client.js";
+      s.async = true;
+      s.crossOrigin = "anonymous";
+      s.setAttribute("data-repo", "Vadale/undoverfit");
+      s.setAttribute("data-repo-id", "REPO_ID_PLACEHOLDER");
+      s.setAttribute("data-category", "Announcements");
+      s.setAttribute("data-category-id", "CATEGORY_ID_PLACEHOLDER");
+      s.setAttribute("data-mapping", "pathname");
+      s.setAttribute("data-strict", "0");
+      s.setAttribute("data-reactions-enabled", "1");
+      s.setAttribute("data-emit-metadata", "0");
+      s.setAttribute("data-input-position", "bottom");
+      s.setAttribute("data-theme", isDark ? "dark" : "light");
+      s.setAttribute("data-lang", "en");
+      s.setAttribute("data-loading", "lazy");
+      container.appendChild(s);
+    };
+
+    const update = () => {
+      const iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      const isDark = document.documentElement.classList.contains("dark");
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: isDark ? "dark" : "light" } } },
+        "https://giscus.app",
+      );
+    };
+
+    mount();
+    document.addEventListener("astro:after-swap", () => {
+      const c = document.getElementById("giscus-container");
+      if (c) c.dataset.mounted = "0";
+      mount();
+    });
+    window.addEventListener("theme-changed", update);
+  })();
+</script>

@@ -1,0 +1,72 @@
+---
+// Subtle synthetic click sounds via Web Audio API.
+// Activates only after first user interaction (browser autoplay policy).
+---
+
+<script is:inline>
+  (() => {
+    if (window.__undoverfitSounds) return;
+    window.__undoverfitSounds = true;
+
+    let ctx = null;
+    let armed = false;
+    let muted = localStorage.getItem("sounds") === "off";
+
+    const ensureCtx = () => {
+      if (!ctx) {
+        try {
+          ctx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (_) {
+          return null;
+        }
+      }
+      if (ctx && ctx.state === "suspended") ctx.resume();
+      return ctx;
+    };
+
+    const tone = ({ freq = 800, duration = 0.03, gain = 0.04, type = "sine" }) => {
+      if (muted) return;
+      const c = ensureCtx();
+      if (!c) return;
+      const osc = c.createOscillator();
+      const g = c.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      g.gain.setValueAtTime(0, c.currentTime);
+      g.gain.linearRampToValueAtTime(gain, c.currentTime + 0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + duration);
+      osc.connect(g).connect(c.destination);
+      osc.start();
+      osc.stop(c.currentTime + duration + 0.02);
+    };
+
+    const onLink = (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      const a = t.closest("a, button");
+      if (!a) return;
+      if (a.id === "theme-toggle") {
+        tone({ freq: 520, duration: 0.05, gain: 0.05, type: "triangle" });
+      } else if (a.tagName === "BUTTON") {
+        tone({ freq: 700, duration: 0.04, gain: 0.04 });
+      } else {
+        tone({ freq: 880, duration: 0.025, gain: 0.035 });
+      }
+    };
+
+    const arm = () => {
+      if (armed) return;
+      armed = true;
+      ensureCtx();
+    };
+
+    document.addEventListener("pointerdown", arm, { once: true });
+    document.addEventListener("keydown", arm, { once: true });
+    document.addEventListener("click", onLink, true);
+
+    window.addEventListener("undoverfit:mute", () => {
+      muted = !muted;
+      localStorage.setItem("sounds", muted ? "off" : "on");
+    });
+  })();
+</script>

@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  html {
+    font-family: theme("fontFamily.sans");
+    background-color: theme("colors.bg.light");
+    color: theme("colors.ink.light");
+  }
+
+  html.dark {
+    background-color: theme("colors.bg.dark");
+    color: theme("colors.ink.dark");
+  }
+
+  body {
+    min-height: 100dvh;
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: theme("fontFamily.serif");
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: theme("colors.rule.light");
+    transition: text-decoration-color 120ms ease;
+  }
+
+  html.dark a {
+    text-decoration-color: theme("colors.rule.dark");
+  }
+
+  a:hover {
+    text-decoration-color: theme("colors.accent.navy");
+  }
+
+  html.dark a:hover {
+    text-decoration-color: theme("colors.accent.gold");
+  }
+
+  ::selection {
+    background-color: theme("colors.accent.gold");
+    color: theme("colors.bg.dark");
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid theme("colors.rule.light");
+    margin: 4rem auto;
+    width: 6rem;
+  }
+
+  html.dark hr {
+    border-top-color: theme("colors.rule.dark");
+  }
+
+  @media (max-width: 640px) {
+    body {
+      font-size: 17px;
+    }
+  }
+}
+
+.fractal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/fractal.svg");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  opacity: 0.05;
+}
+
+html.dark .fractal-bg {
+  opacity: 0.07;
+  filter: invert(1);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 400ms ease-out both;
+}

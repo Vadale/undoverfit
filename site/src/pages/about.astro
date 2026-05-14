@@ -1,0 +1,19 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const about = await getEntry("pages", "about");
+if (!about) throw new Error("about page not found in src/content/pages");
+const { Content } = await render(about);
+---
+
+<Layout title={about.data.title} description={about.data.description}>
+  <article class="mx-auto w-full max-w-prose px-5">
+    <h1 class="font-serif text-3xl">{about.data.title}</h1>
+    <div
+      class="prose prose-neutral dark:prose-invert prose-headings:font-serif prose-headings:font-medium prose-a:font-normal max-w-none mt-8"
+    >
+      <Content />
+    </div>
+  </article>
+</Layout>

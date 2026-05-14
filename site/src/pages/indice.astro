@@ -1,0 +1,41 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import { formatDate, getPostNumber, getPublishedPosts } from "~/lib/posts";
+
+const posts = await getPublishedPosts();
+---
+
+<Layout title="Index" description="All posts on Undoverfit, newest first.">
+  <section class="mx-auto w-full max-w-prose px-5">
+    <h1 class="font-serif text-3xl">Index</h1>
+    <p class="mt-2 text-sm text-muted-light dark:text-muted-dark">
+      Every page is a post. Newest first.
+    </p>
+    <ul class="mt-10 divide-y divide-rule-light dark:divide-rule-dark">
+      {
+        posts.map((post) => {
+          const n = getPostNumber(post);
+          return (
+            <li class="py-4">
+              <a
+                href={`/${n}`}
+                class="flex items-baseline gap-4 no-underline hover:underline decoration-1 underline-offset-4"
+              >
+                <span class="w-10 shrink-0 text-sm text-muted-light dark:text-muted-dark tabular-nums">
+                  {String(n).padStart(2, "0")}
+                </span>
+                <span class="font-serif flex-1">{post.data.title}</span>
+                <time
+                  class="shrink-0 text-sm text-muted-light dark:text-muted-dark"
+                  datetime={post.data.pubDate.toISOString()}
+                >
+                  {formatDate(post.data.pubDate)}
+                </time>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</Layout>

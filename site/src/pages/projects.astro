@@ -1,0 +1,55 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+const all = await getCollection("projects");
+const projects = all.sort((a, b) => b.data.year - a.data.year);
+
+const statusLabel: Record<string, string> = {
+  active: "active",
+  archived: "archived",
+  "in-progress": "in progress",
+};
+---
+
+<Layout title="Projects" description="Things I have built and things I am building.">
+  <section class="mx-auto w-full max-w-prose px-5">
+    <h1 class="font-serif text-3xl">Projects</h1>
+    <p class="mt-2 text-sm text-muted-light dark:text-muted-dark">
+      Things I have built and things I am building.
+    </p>
+
+    <ul class="mt-10 divide-y divide-rule-light dark:divide-rule-dark">
+      {
+        await Promise.all(
+          projects.map(async (project) => {
+            const { Content } = await render(project);
+            return (
+              <li class="py-6">
+                <div class="flex items-baseline justify-between gap-4">
+                  <a
+                    href={project.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-serif text-lg no-underline hover:underline decoration-1 underline-offset-4"
+                  >
+                    {project.data.title}
+                  </a>
+                  <span class="shrink-0 text-sm text-muted-light dark:text-muted-dark tabular-nums">
+                    {project.data.year}
+                  </span>
+                </div>
+                <p class="mt-1 text-sm text-muted-light dark:text-muted-dark">
+                  {statusLabel[project.data.status]} · {project.data.description}
+                </p>
+                <div class="prose prose-sm prose-neutral dark:prose-invert max-w-none mt-3 text-[0.95rem]">
+                  <Content />
+                </div>
+              </li>
+            );
+          }),
+        )
+      }
+    </ul>
+  </section>
+</Layout>

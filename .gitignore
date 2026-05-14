@@ -1,0 +1,22 @@
+# This repo tracks only the static site/. Everything else stays local.
+
+# Catch-all: ignore anything at the repo root...
+/*
+# ...except for this .gitignore and the site itself.
+!/.gitignore
+!/site/
+
+# (For reference, the local-only items currently present are:
+#   /.claude/                       -> Claude Code agents
+#   /docs/                          -> internal documentation
+#   /CLAUDE.md                      -> Claude Code project instructions
+#   /prompt-guide-blog-astro.md     -> original spec for the blog
+#   /bozze/                         -> blog post drafts
+# )
+
+# OS / editor noise (matches anywhere, including inside site/)
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
