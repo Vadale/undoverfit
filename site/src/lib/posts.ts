@@ -40,3 +40,40 @@ export async function getAdjacent(entry: Post): Promise<{
     next: idx >= 0 && idx < sortedAsc.length - 1 ? sortedAsc[idx + 1] : null,
   };
 }
+
+// Normalize a tag for use in a URL. Lowercase + non-alphanumerics → hyphens.
+export function tagSlug(tag: string): string {
+  return tag
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export type TagBucket = {
+  tag: string;
+  slug: string;
+  count: number;
+  posts: Post[];
+};
+
+export async function getAllTags(): Promise<TagBucket[]> {
+  const posts = await getPublishedPosts();
+  const map = new Map<string, { tag: string; posts: Post[] }>();
+  for (const p of posts) {
+    for (const t of p.data.tags ?? []) {
+      const slug = tagSlug(t);
+      if (!slug) continue;
+      const existing = map.get(slug) ?? { tag: t, posts: [] };
+      existing.posts.push(p);
+      map.set(slug, existing);
+    }
+  }
+  return [...map.entries()]
+    .map(([slug, v]) => ({
+      slug,
+      tag: v.tag,
+      count: v.posts.length,
+      posts: v.posts,
+    }))
+    .sort((a, b) => a.tag.localeCompare(b.tag));
+}

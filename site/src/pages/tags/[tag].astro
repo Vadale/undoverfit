@@ -1,0 +1,66 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import {
+  formatDate,
+  getAllTags,
+  getPostNumber,
+  type Post,
+} from "~/lib/posts";
+
+export async function getStaticPaths() {
+  const tags = await getAllTags();
+  return tags.map((t) => ({
+    params: { tag: t.slug },
+    props: { tag: t.tag, posts: t.posts },
+  }));
+}
+
+interface Props {
+  tag: string;
+  posts: Post[];
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<Layout
+  title={`Tagged: ${tag}`}
+  description={`Posts on Undoverfit tagged with "${tag}".`}
+>
+  <section class="mx-auto w-full max-w-prose px-5">
+    <p class="text-sm text-muted-light dark:text-muted-dark">
+      <a href="/tags" class="no-underline hover:underline">← all tags</a>
+    </p>
+    <h1 class="mt-2 font-serif text-3xl">Tagged: {tag}</h1>
+    <p class="mt-2 text-sm text-muted-light dark:text-muted-dark">
+      {posts.length} post{posts.length === 1 ? "" : "s"}.
+    </p>
+
+    <ul class="mt-10 divide-y divide-rule-light dark:divide-rule-dark">
+      {
+        posts.map((post) => {
+          const n = getPostNumber(post);
+          return (
+            <li class="py-4">
+              <a
+                href={`/${n}`}
+                class="flex items-baseline gap-4 no-underline hover:underline decoration-1 underline-offset-4"
+              >
+                <span class="w-10 shrink-0 text-sm text-muted-light dark:text-muted-dark tabular-nums">
+                  {String(n).padStart(2, "0")}
+                </span>
+                <span class="font-serif flex-1">{post.data.title}</span>
+                <time
+                  class="shrink-0 text-sm text-muted-light dark:text-muted-dark"
+                  datetime={post.data.pubDate.toISOString()}
+                >
+                  {formatDate(post.data.pubDate)}
+                </time>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</Layout>

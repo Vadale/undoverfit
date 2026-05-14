@@ -6,6 +6,7 @@ import {
   getAdjacent,
   getPostNumber,
   getPublishedPosts,
+  tagSlug,
   type Post,
 } from "~/lib/posts";
 import { render } from "astro:content";
@@ -53,6 +54,18 @@ const { prev, next } = await getAdjacent(post);
     >
       <Content />
     </div>
+
+    {post.data.tags.length > 0 && (
+      <p class="mt-10 text-sm text-muted-light dark:text-muted-dark">
+        Tagged:{" "}
+        {post.data.tags.map((t, i) => (
+          <>
+            {i > 0 && <span>, </span>}
+            <a href={`/tags/${tagSlug(t)}`} class="no-underline hover:underline">{t}</a>
+          </>
+        ))}
+      </p>
+    )}
 
     <nav
       class="mt-16 flex items-center justify-between text-sm text-muted-light dark:text-muted-dark"
