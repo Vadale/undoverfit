@@ -4,16 +4,21 @@ import { html } from "satori-html";
 import sharp from "sharp";
 import { SITE } from "~/lib/site";
 
-async function loadFont(family: string, weight: number): Promise<ArrayBuffer> {
+async function loadFont(
+  family: string,
+  weight: number,
+  italic = false,
+): Promise<ArrayBuffer> {
+  const ital = italic ? "1," : "0,";
   const url = `https://fonts.googleapis.com/css2?family=${family.replace(
     / /g,
     "+",
-  )}:wght@${weight}&display=swap`;
+  )}:ital,wght@${ital}${weight}&display=swap`;
   const css = await fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0" },
   }).then((r) => r.text());
   const match = css.match(/src: url\((https:[^)]+)\) format/);
-  if (!match) throw new Error(`font not found: ${family}@${weight}`);
+  if (!match) throw new Error(`font not found: ${family}@${weight}${italic ? " italic" : ""}`);
   return fetch(match[1]).then((r) => r.arrayBuffer());
 }
 
@@ -23,17 +28,35 @@ export async function GET(_: APIContext) {
       style="
         width: 1200px;
         height: 630px;
-        background: #0e1a26;
-        color: #ede7d8;
+        background: #f4f1e8;
+        color: #0e2236;
         font-family: 'Lora';
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 80px;
       "
     >
-      <div style="font-size: 96px; letter-spacing: -0.02em; color: #ede7d8;">${SITE.name}</div>
-      <div style="margin-top: 20px; font-size: 26px; color: #5dd3c1; font-style: italic;">
+      <div
+        style="
+          font-size: 180px;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          display: flex;
+          color: #0e2236;
+        "
+      >
+        Und<span style="color: #1b6e70; font-style: italic; font-weight: 400;">over</span>fit
+      </div>
+      <div
+        style="
+          margin-top: 40px;
+          font-size: 30px;
+          color: #5a6878;
+          font-style: italic;
+        "
+      >
         ${SITE.tagline}
       </div>
     </div>
@@ -41,8 +64,7 @@ export async function GET(_: APIContext) {
 
   const [lora, loraItalic] = await Promise.all([
     loadFont("Lora", 500),
-    // satori uses the italic glyphs for font-style: italic spans
-    loadFont("Lora", 400),
+    loadFont("Lora", 400, true),
   ]);
   const svg = await satori(markup as Parameters<typeof satori>[0], {
     width: 1200,

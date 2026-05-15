@@ -13,16 +13,21 @@ export async function getStaticPaths() {
   }));
 }
 
-async function loadFont(family: string, weight: number): Promise<ArrayBuffer> {
+async function loadFont(
+  family: string,
+  weight: number,
+  italic = false,
+): Promise<ArrayBuffer> {
+  const ital = italic ? "1," : "0,";
   const url = `https://fonts.googleapis.com/css2?family=${family.replace(
     / /g,
     "+",
-  )}:wght@${weight}&display=swap`;
+  )}:ital,wght@${ital}${weight}&display=swap`;
   const css = await fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0" },
   }).then((r) => r.text());
   const match = css.match(/src: url\((https:[^)]+)\) format/);
-  if (!match) throw new Error(`font not found: ${family}@${weight}`);
+  if (!match) throw new Error(`font not found: ${family}@${weight}${italic ? " italic" : ""}`);
   return fetch(match[1]).then((r) => r.arrayBuffer());
 }
 
@@ -37,43 +42,44 @@ export async function GET({ props }: APIContext) {
       style="
         width: 1200px;
         height: 630px;
-        background: #0e1a26;
-        color: #ede7d8;
+        background: #f4f1e8;
+        color: #0e2236;
         font-family: 'Plus Jakarta Sans';
-        padding: 72px;
+        padding: 80px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
       "
     >
-      <div style="font-size: 22px; color: #5c6a78; letter-spacing: 0.04em;">
+      <div style="font-size: 22px; color: #98a1ad; letter-spacing: 0.18em; text-transform: uppercase;">
         page ${String(n).padStart(2, "0")}
       </div>
       <div
         style="
           font-family: 'Lora';
-          font-size: 72px;
-          line-height: 1.1;
-          color: #ede7d8;
+          font-size: 80px;
+          line-height: 1.05;
+          color: #0e2236;
           letter-spacing: -0.01em;
-          max-width: 1000px;
+          max-width: 1040px;
         "
       >
         ${plainTitle(post.data.title)}
       </div>
       <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-        <div style="font-size: 22px; color: #5dd3c1; letter-spacing: 0.04em;">
-          ${SITE.name}
+        <div style="font-family: 'Lora'; font-size: 32px; color: #0e2236; display: flex;">
+          Und<span style="color: #1b6e70; font-style: italic;">over</span>fit
         </div>
-        <div style="font-size: 20px; color: #5c6a78; text-align: right;">
+        <div style="font-size: 18px; color: #98a1ad; text-align: right; letter-spacing: 0.18em; text-transform: uppercase;">
           ${location ? `${location} · ` : ""}${date}
         </div>
       </div>
     </div>
   `;
 
-  const [lora, jakarta] = await Promise.all([
+  const [lora, loraItalic, jakarta] = await Promise.all([
     loadFont("Lora", 500),
+    loadFont("Lora", 400, true),
     loadFont("Plus Jakarta Sans", 500),
   ]);
 
@@ -82,6 +88,7 @@ export async function GET({ props }: APIContext) {
     height: 630,
     fonts: [
       { name: "Lora", data: lora, weight: 500, style: "normal" },
+      { name: "Lora", data: loraItalic, weight: 400, style: "italic" },
       { name: "Plus Jakarta Sans", data: jakarta, weight: 500, style: "normal" },
     ],
   });

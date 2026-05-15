@@ -89,10 +89,11 @@ const ogImage = image
 
     <script is:inline>
       // Apply theme before paint to avoid flash.
+      // Default is light. Dark mode only if the user explicitly toggled it
+      // (stored = "dark"). System dark-mode is intentionally ignored.
       (() => {
         const stored = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const isDark = stored ? stored === "dark" : prefersDark;
+        const isDark = stored === "dark";
         document.documentElement.classList.toggle("dark", isDark);
       })();
     </script>
