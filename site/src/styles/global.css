@@ -33,7 +33,7 @@ html.dark {
 
   body {
     min-height: 100dvh;
-    font-size: 22px;
+    font-size: 16px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -44,14 +44,14 @@ html.dark {
   .prose,
   .prose p,
   .prose li {
-    font-size: 22px !important;
+    font-size: 16px !important;
     line-height: 1.7 !important;
   }
   @media (min-width: 768px) {
     .prose,
     .prose p,
     .prose li {
-      font-size: 24px !important;
+      font-size: 18px !important;
     }
   }
 
@@ -103,7 +103,7 @@ html.dark {
 
   @media (max-width: 640px) {
     body {
-      font-size: 20px;
+      font-size: 14px;
     }
   }
 }
