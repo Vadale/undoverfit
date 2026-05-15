@@ -8,28 +8,28 @@ export default {
     extend: {
       colors: {
         bg: {
-          light: "#f5f5f0",
-          dark: "#1a1a1a",
+          light: "#ede4d0",
+          dark: "#0f1b2d",
         },
         ink: {
-          light: "#1a1a1a",
-          dark: "#e8e6e1",
+          light: "#1a2738",
+          dark: "#d8dde3",
         },
         muted: {
-          light: "#666666",
-          dark: "#888888",
+          light: "#9c8f7d",
+          dark: "#7989a0",
         },
         rule: {
-          light: "#dddddd",
-          dark: "#333333",
+          light: "#d0c8b4",
+          dark: "#243245",
         },
         accent: {
-          navy: "#1a2f4e",
-          gold: "#c89a2a",
+          navy: "#1a2738",
+          teal: "#4a7570",
         },
       },
       fontFamily: {
-        serif: ['"EB Garamond"', "Georgia", "serif"],
+        serif: ["Lora", "Georgia", "serif"],
         sans: ['"Plus Jakarta Sans"', "Inter", "system-ui", "sans-serif"],
       },
       maxWidth: {

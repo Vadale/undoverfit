@@ -1,4 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#1a1a1a"/>
-  <text x="16" y="22" font-family="Georgia, serif" font-size="18" fill="#e8e6e1" text-anchor="middle" font-style="italic">u</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 32">
+  <g fill="none" stroke="#4a7570" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left: U opening up (under-fit), no dots -->
+    <path d="M 4 4 L 4 18 Q 4 28 14 28 L 18 28 Q 28 28 28 18 L 28 4" />
+    <!-- Right: U opening down (over-fit), 4 dots fitting the arc -->
+    <path d="M 36 28 L 36 14 Q 36 4 46 4 L 50 4 Q 60 4 60 14 L 60 28" />
+  </g>
+  <g fill="#4a7570">
+    <circle cx="38" cy="6" r="2" />
+    <circle cx="44" cy="3.5" r="2" />
+    <circle cx="52" cy="3.5" r="2" />
+    <circle cx="58" cy="6" r="2" />
+  </g>
 </svg>
