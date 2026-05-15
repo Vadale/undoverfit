@@ -1,9 +1,9 @@
 ---
 import Layout from "~/layouts/Layout.astro";
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
+import { getProjects } from "~/lib/projects";
 
-const all = await getCollection("projects");
-const projects = all.sort((a, b) => b.data.year - a.data.year);
+const projects = await getProjects();
 
 const statusLabel: Record<string, string> = {
   active: "active",
