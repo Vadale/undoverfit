@@ -23,27 +23,34 @@ export async function GET(_: APIContext) {
       style="
         width: 1200px;
         height: 630px;
-        background: #1a1a1a;
-        color: #e8e6e1;
-        font-family: 'EB Garamond';
+        background: #0e1a26;
+        color: #ede7d8;
+        font-family: 'Lora';
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       "
     >
-      <div style="font-size: 96px; letter-spacing: -0.02em; color: #e8e6e1;">${SITE.name}</div>
-      <div style="margin-top: 20px; font-size: 26px; color: #888; font-style: italic;">
+      <div style="font-size: 96px; letter-spacing: -0.02em; color: #ede7d8;">${SITE.name}</div>
+      <div style="margin-top: 20px; font-size: 26px; color: #5dd3c1; font-style: italic;">
         ${SITE.tagline}
       </div>
     </div>
   `;
 
-  const garamond = await loadFont("EB Garamond", 500);
+  const [lora, loraItalic] = await Promise.all([
+    loadFont("Lora", 500),
+    // satori uses the italic glyphs for font-style: italic spans
+    loadFont("Lora", 400),
+  ]);
   const svg = await satori(markup as Parameters<typeof satori>[0], {
     width: 1200,
     height: 630,
-    fonts: [{ name: "EB Garamond", data: garamond, weight: 500, style: "normal" }],
+    fonts: [
+      { name: "Lora", data: lora, weight: 500, style: "normal" },
+      { name: "Lora", data: loraItalic, weight: 400, style: "italic" },
+    ],
   });
   const png = await sharp(Buffer.from(svg)).png().toBuffer();
   return new Response(png, {

@@ -37,8 +37,8 @@ export async function GET({ props }: APIContext) {
       style="
         width: 1200px;
         height: 630px;
-        background: #1a1a1a;
-        color: #e8e6e1;
+        background: #0e1a26;
+        color: #ede7d8;
         font-family: 'Plus Jakarta Sans';
         padding: 72px;
         display: flex;
@@ -46,15 +46,15 @@ export async function GET({ props }: APIContext) {
         justify-content: space-between;
       "
     >
-      <div style="font-size: 22px; color: #888; letter-spacing: 0.04em;">
+      <div style="font-size: 22px; color: #5c6a78; letter-spacing: 0.04em;">
         page ${String(n).padStart(2, "0")}
       </div>
       <div
         style="
-          font-family: 'EB Garamond';
+          font-family: 'Lora';
           font-size: 72px;
           line-height: 1.1;
-          color: #e8e6e1;
+          color: #ede7d8;
           letter-spacing: -0.01em;
           max-width: 1000px;
         "
@@ -62,18 +62,18 @@ export async function GET({ props }: APIContext) {
         ${plainTitle(post.data.title)}
       </div>
       <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-        <div style="font-size: 22px; color: #c89a2a; letter-spacing: 0.04em;">
+        <div style="font-size: 22px; color: #5dd3c1; letter-spacing: 0.04em;">
           ${SITE.name}
         </div>
-        <div style="font-size: 20px; color: #888; text-align: right;">
+        <div style="font-size: 20px; color: #5c6a78; text-align: right;">
           ${location ? `${location} · ` : ""}${date}
         </div>
       </div>
     </div>
   `;
 
-  const [garamond, jakarta] = await Promise.all([
-    loadFont("EB Garamond", 500),
+  const [lora, jakarta] = await Promise.all([
+    loadFont("Lora", 500),
     loadFont("Plus Jakarta Sans", 500),
   ]);
 
@@ -81,7 +81,7 @@ export async function GET({ props }: APIContext) {
     width: 1200,
     height: 630,
     fonts: [
-      { name: "EB Garamond", data: garamond, weight: 500, style: "normal" },
+      { name: "Lora", data: lora, weight: 500, style: "normal" },
       { name: "Plus Jakarta Sans", data: jakarta, weight: 500, style: "normal" },
     ],
   });
