@@ -1,6 +1,12 @@
 ---
-import { NAV } from "~/lib/site";
 import ThemeToggle from "./ThemeToggle.astro";
+
+const path = Astro.url.pathname;
+
+function isActive(prefix: string): boolean {
+  if (prefix === "/indice") return path === "/indice" || path.startsWith("/indice/");
+  return path.startsWith(prefix);
+}
 ---
 
 <header class="mx-auto w-full max-w-prose px-5 pt-10 pb-12 sm:pt-14">
@@ -47,19 +53,59 @@ import ThemeToggle from "./ThemeToggle.astro";
     </a>
     <ThemeToggle />
   </div>
-  <nav class="mt-4 text-sm text-ink-2">
-    {
-      NAV.map((item, i) => (
-        <span>
-          {i > 0 && <span class="mx-1.5 opacity-60">·</span>}
-          <a
-            href={item.href}
-            class="no-underline hover:underline decoration-1 underline-offset-4"
-          >
-            {item.label}
-          </a>
-        </span>
-      ))
-    }
+  <nav class="mt-6 flex items-center justify-center gap-8 sm:gap-12" aria-label="Site navigation">
+    <a
+      href="/indice"
+      aria-label="Index"
+      class={`transition-colors ${isActive("/indice") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+    >
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="7"  x2="20" y2="7"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="17" x2="14" y2="17"/>
+      </svg>
+    </a>
+    <a
+      href="/tags"
+      aria-label="Tags"
+      class={`transition-colors ${isActive("/tags") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+    >
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+        <path d="M 12 4 L 4 4 L 4 12 L 12 20 L 20 12 Z"/>
+        <circle cx="8" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a
+      href="/search"
+      aria-label="Search"
+      class={`transition-colors ${isActive("/search") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+    >
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="6"/>
+        <line x1="15.5" y1="15.5" x2="20" y2="20"/>
+      </svg>
+    </a>
+    <a
+      href="/projects"
+      aria-label="Projects"
+      class={`transition-colors ${isActive("/projects") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+    >
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <rect x="4"  y="4"  width="7" height="7"/>
+        <rect x="13" y="4"  width="7" height="7"/>
+        <rect x="4"  y="13" width="7" height="7"/>
+        <rect x="13" y="13" width="7" height="7"/>
+      </svg>
+    </a>
+    <a
+      href="/about"
+      aria-label="About"
+      class={`transition-colors ${isActive("/about") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+    >
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="8"/>
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
   </nav>
 </header>

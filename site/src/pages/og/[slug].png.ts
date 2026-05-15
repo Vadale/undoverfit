@@ -2,7 +2,7 @@ import type { APIContext } from "astro";
 import satori from "satori";
 import { html } from "satori-html";
 import sharp from "sharp";
-import { getPublishedPosts, getPostNumber, formatDate } from "~/lib/posts";
+import { getPublishedPosts, getPostNumber, formatDate, plainTitle } from "~/lib/posts";
 import { SITE } from "~/lib/site";
 
 export async function getStaticPaths() {
@@ -59,7 +59,7 @@ export async function GET({ props }: APIContext) {
           max-width: 1000px;
         "
       >
-        ${post.data.title}
+        ${plainTitle(post.data.title)}
       </div>
       <div style="display: flex; justify-content: space-between; align-items: flex-end;">
         <div style="font-size: 22px; color: #c89a2a; letter-spacing: 0.04em;">

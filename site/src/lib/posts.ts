@@ -41,6 +41,11 @@ export async function getAdjacent(entry: Post): Promise<{
   };
 }
 
+// Strip HTML tags from a title so it is safe for <title>, OG meta, RSS, and OG images.
+export function plainTitle(title: string): string {
+  return title.replace(/<[^>]+>/g, "");
+}
+
 // Normalize a tag for use in a URL. Lowercase + non-alphanumerics → hyphens.
 export function tagSlug(tag: string): string {
   return tag
