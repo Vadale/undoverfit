@@ -13,11 +13,20 @@
 
 <script is:inline>
   (() => {
+    const themeUrl = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      // Custom theme hosted by the site itself so giscus matches our palette / font.
+      // In local dev (localhost) giscus can't fetch the file → fall back to the
+      // closest preset so comments stay readable.
+      const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+      if (isLocal) return isDark ? "dark" : "light";
+      return location.origin + (isDark ? "/giscus-theme-dark.css" : "/giscus-theme-light.css");
+    };
+
     const mount = () => {
       const container = document.getElementById("giscus-container");
       if (!container || container.dataset.mounted === "1") return;
       container.dataset.mounted = "1";
-      const isDark = document.documentElement.classList.contains("dark");
       const s = document.createElement("script");
       s.src = "https://giscus.app/client.js";
       s.async = true;
@@ -31,7 +40,7 @@
       s.setAttribute("data-reactions-enabled", "1");
       s.setAttribute("data-emit-metadata", "0");
       s.setAttribute("data-input-position", "bottom");
-      s.setAttribute("data-theme", isDark ? "dark" : "light");
+      s.setAttribute("data-theme", themeUrl());
       s.setAttribute("data-lang", "en");
       s.setAttribute("data-loading", "lazy");
       container.appendChild(s);
@@ -40,9 +49,8 @@
     const update = () => {
       const iframe = document.querySelector("iframe.giscus-frame");
       if (!iframe) return;
-      const isDark = document.documentElement.classList.contains("dark");
       iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: isDark ? "dark" : "light" } } },
+        { giscus: { setConfig: { theme: themeUrl() } } },
         "https://giscus.app",
       );
     };

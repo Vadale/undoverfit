@@ -1,0 +1,51 @@
+---
+// Floating back-to-top button. Appears after 300px of scroll, smooth-scrolls home on click.
+---
+
+<button
+  id="scroll-top"
+  type="button"
+  aria-label="Back to top"
+  class="fixed bottom-6 right-6 z-40 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-rule bg-paper text-ink-2 opacity-0 pointer-events-none transition-opacity duration-200 hover:text-ink sm:bottom-8 sm:right-8"
+>
+  <svg
+    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <polyline points="6 14 12 8 18 14" />
+  </svg>
+</button>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const btn = document.getElementById("scroll-top");
+      if (!btn || btn.dataset.bound === "1") return;
+      btn.dataset.bound = "1";
+
+      const apply = () => {
+        const visible = window.scrollY > 300;
+        btn.classList.toggle("opacity-100", visible);
+        btn.classList.toggle("opacity-0", !visible);
+        btn.classList.toggle("pointer-events-none", !visible);
+        btn.classList.toggle("pointer-events-auto", visible);
+      };
+
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      window.addEventListener("scroll", apply, { passive: true });
+      apply();
+    };
+
+    init();
+    document.addEventListener("astro:after-swap", init);
+  })();
+</script>
