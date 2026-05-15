@@ -74,8 +74,14 @@ html.dark {
   hr {
     border: 0;
     border-top: 1px solid var(--rule);
-    margin: 6rem 0;
+    margin: 9rem 0;
     width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    hr {
+      margin: 11rem 0;
+    }
   }
 
   @media (max-width: 640px) {
