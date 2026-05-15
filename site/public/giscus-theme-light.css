@@ -40,9 +40,9 @@ main {
   --color-fg-muted: #5a6878;
   --color-fg-subtle: #98a1ad;
 
-  --color-canvas-default: transparent;
+  --color-canvas-default: #f4f1e8;
   --color-canvas-overlay: #f4f1e8;
-  --color-canvas-inset: transparent;
+  --color-canvas-inset: rgba(14, 34, 54, 0.02);
   --color-canvas-subtle: rgba(14, 34, 54, 0.03);
 
   --color-border-default: rgba(14, 34, 54, 0.10);
@@ -70,14 +70,18 @@ main {
   --color-scale-gray-1: rgba(14, 34, 54, 0.06);
 
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  background: transparent;
+  background: #f4f1e8;
+}
+
+html, body {
+  background: #f4f1e8;
 }
 
 main .markdown-body,
 main .markdown-body p,
 main .markdown-body li {
   font-family: "Lora", Georgia, serif;
-  font-size: 17px;
+  font-size: 19px;
   line-height: 1.7;
   color: #0e2236;
 }

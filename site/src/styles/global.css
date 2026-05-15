@@ -33,7 +33,7 @@ html.dark {
 
   body {
     min-height: 100dvh;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -80,7 +80,7 @@ html.dark {
 
   @media (max-width: 640px) {
     body {
-      font-size: 19px;
+      font-size: 21px;
     }
   }
 }
