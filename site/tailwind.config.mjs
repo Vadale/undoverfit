@@ -19,9 +19,9 @@ export default {
         sans: ['"Plus Jakarta Sans"', "Inter", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        // Fixed pixel-equivalent width (40rem = 640px at the default 16px root)
+        // Fixed pixel-equivalent width (46rem = 736px at the default 16px root)
         // so the column stays narrow and centered regardless of body font size.
-        prose: "40rem",
+        prose: "46rem",
       },
     },
   },
