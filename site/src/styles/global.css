@@ -33,7 +33,7 @@ html.dark {
 
   body {
     min-height: 100dvh;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -80,7 +80,7 @@ html.dark {
 
   @media (max-width: 640px) {
     body {
-      font-size: 17px;
+      font-size: 19px;
     }
   }
 }
@@ -123,4 +123,9 @@ html.dark {
 
 .fade-in {
   animation: fade-in 400ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation: none; }
+  * { transition: none !important; }
 }

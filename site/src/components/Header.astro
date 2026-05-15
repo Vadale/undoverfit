@@ -9,7 +9,7 @@ function isActive(prefix: string): boolean {
 }
 ---
 
-<header class="mx-auto w-full max-w-prose px-5 pt-12 pb-20 sm:pt-16 sm:pb-24">
+<header class="mx-auto w-full max-w-prose px-5 pt-10 pb-14 sm:pt-14 sm:pb-20">
   <div class="flex items-baseline justify-between gap-4">
     <a
       href="/"
@@ -53,11 +53,11 @@ function isActive(prefix: string): boolean {
     </a>
     <ThemeToggle />
   </div>
-  <nav class="mt-12 sm:mt-16 flex items-center justify-center gap-10 sm:gap-14" aria-label="Site navigation">
+  <nav class="mt-10 sm:mt-14 flex items-center justify-center gap-4 sm:gap-8" aria-label="Site navigation">
     <a
       href="/indice"
       aria-label="Index"
-      class={`transition-colors ${isActive("/indice") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+      class={`inline-flex items-center justify-center min-h-[44px] min-w-[44px] -m-2 p-2 transition-colors ${isActive("/indice") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
     >
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
         <line x1="4" y1="7"  x2="20" y2="7"/>
@@ -68,7 +68,7 @@ function isActive(prefix: string): boolean {
     <a
       href="/tags"
       aria-label="Tags"
-      class={`transition-colors ${isActive("/tags") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+      class={`inline-flex items-center justify-center min-h-[44px] min-w-[44px] -m-2 p-2 transition-colors ${isActive("/tags") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
     >
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
         <path d="M 12 4 L 4 4 L 4 12 L 12 20 L 20 12 Z"/>
@@ -78,7 +78,7 @@ function isActive(prefix: string): boolean {
     <a
       href="/search"
       aria-label="Search"
-      class={`transition-colors ${isActive("/search") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+      class={`inline-flex items-center justify-center min-h-[44px] min-w-[44px] -m-2 p-2 transition-colors ${isActive("/search") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
     >
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
         <circle cx="11" cy="11" r="6"/>
@@ -88,7 +88,7 @@ function isActive(prefix: string): boolean {
     <a
       href="/projects"
       aria-label="Projects"
-      class={`transition-colors ${isActive("/projects") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+      class={`inline-flex items-center justify-center min-h-[44px] min-w-[44px] -m-2 p-2 transition-colors ${isActive("/projects") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
     >
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <rect x="4"  y="4"  width="7" height="7"/>
@@ -100,7 +100,7 @@ function isActive(prefix: string): boolean {
     <a
       href="/about"
       aria-label="About"
-      class={`transition-colors ${isActive("/about") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
+      class={`inline-flex items-center justify-center min-h-[44px] min-w-[44px] -m-2 p-2 transition-colors ${isActive("/about") ? "text-teal" : "text-ink-2 hover:text-ink"}`}
     >
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <circle cx="12" cy="12" r="8"/>
