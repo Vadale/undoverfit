@@ -55,6 +55,13 @@ html.dark {
     }
   }
 
+  /* Justify the article body. hyphens helps avoid huge gaps on narrower viewports. */
+  .prose p {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
   h1,
   h2,
   h3 {
