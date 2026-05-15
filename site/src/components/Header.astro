@@ -1,11 +1,17 @@
 ---
-import { NAV, SITE } from "~/lib/site";
+import { NAV } from "~/lib/site";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <header class="mx-auto w-full max-w-prose px-5 pt-10 pb-12 sm:pt-14">
   <div class="flex items-baseline justify-between gap-4">
-    <a href="/" class="font-serif text-xl tracking-tight no-underline">{SITE.name}</a>
+    <a
+      href="/"
+      class="font-serif text-3xl sm:text-4xl tracking-tight no-underline leading-none"
+      aria-label="Undoverfit — home"
+    >
+      Und<span class="italic font-normal text-accent-teal">over</span>fit
+    </a>
     <ThemeToggle />
   </div>
   <nav class="mt-4 text-sm text-muted-light dark:text-muted-dark">
