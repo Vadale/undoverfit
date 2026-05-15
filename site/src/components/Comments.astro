@@ -13,6 +13,9 @@
 
 <script is:inline>
   (() => {
+    // Bump this when the theme CSS changes so giscus's iframe re-fetches.
+    const THEME_V = "3";
+
     const themeUrl = () => {
       const isDark = document.documentElement.classList.contains("dark");
       // Custom theme hosted by the site itself so giscus matches our palette / font.
@@ -20,7 +23,8 @@
       // closest preset so comments stay readable.
       const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
       if (isLocal) return isDark ? "dark" : "light";
-      return location.origin + (isDark ? "/giscus-theme-dark.css" : "/giscus-theme-light.css");
+      const file = isDark ? "/giscus-theme-dark.css" : "/giscus-theme-light.css";
+      return location.origin + file + "?v=" + THEME_V;
     };
 
     const mount = () => {
