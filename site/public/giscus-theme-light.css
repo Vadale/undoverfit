@@ -1,6 +1,28 @@
 /* Custom Giscus theme — light. Loaded by Comments.astro via data-theme. */
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500&display=swap");
 
+/* Defensive baseline: force canvas + text regardless of Giscus internal paint order. */
+html, body, main {
+  background-color: #f4f1e8 !important;
+  color: #0e2236 !important;
+}
+
+.gsc-main,
+.gsc-comments,
+.gsc-comment,
+.gsc-comment-box,
+.gsc-comment-content,
+.gsc-comment-header,
+.gsc-reactions,
+.gsc-timeline-tail,
+.gsc-tab-panel {
+  background-color: #f4f1e8 !important;
+  color: #0e2236 !important;
+}
+
+/* Pagination button kept OUT of the !important block — it lives on a same-colour
+   container, so it needs its border from --color-btn-border to stay visible. */
+
 main {
   --color-prettylights-syntax-comment: #98a1ad;
   --color-prettylights-syntax-constant: #1b6e70;
