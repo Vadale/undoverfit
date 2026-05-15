@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --paper: #f4f1e8;
+  --ink:   #0e2236;
+  --ink-2: #5a6878;
+  --ink-3: #98a1ad;
+  --teal:  #1b6e70;
+  --rule:  rgba(14, 34, 54, 0.10);
+}
+
+html.dark {
+  --paper: #0e1a26;
+  --ink:   #ede7d8;
+  --ink-2: #8e9aa8;
+  --ink-3: #5c6a78;
+  --teal:  #5dd3c1;
+  --rule:  rgba(237, 231, 216, 0.10);
+}
+
 @layer base {
   :root {
     color-scheme: light dark;
@@ -9,13 +27,8 @@
 
   html {
     font-family: theme("fontFamily.sans");
-    background-color: theme("colors.bg.light");
-    color: theme("colors.ink.light");
-  }
-
-  html.dark {
-    background-color: theme("colors.bg.dark");
-    color: theme("colors.ink.dark");
+    background-color: var(--paper);
+    color: var(--ink);
   }
 
   body {
@@ -37,7 +50,7 @@
   h1 em, h1 i,
   h2 em, h2 i,
   h3 em, h3 i {
-    color: theme("colors.accent.teal");
+    color: var(--teal);
     font-style: italic;
     font-weight: inherit;
   }
@@ -47,32 +60,24 @@
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
-    text-decoration-color: theme("colors.rule.light");
+    text-decoration-color: var(--rule);
     transition: text-decoration-color 120ms ease;
   }
 
-  html.dark a {
-    text-decoration-color: theme("colors.rule.dark");
-  }
-
   a:hover {
-    text-decoration-color: theme("colors.accent.teal");
+    text-decoration-color: var(--teal);
   }
 
   ::selection {
-    background-color: theme("colors.accent.teal");
-    color: theme("colors.bg.light");
+    background-color: var(--teal);
+    color: var(--paper);
   }
 
   hr {
     border: 0;
-    border-top: 1px solid theme("colors.rule.light");
+    border-top: 1px solid var(--rule);
     margin: 4rem auto;
     width: 6rem;
-  }
-
-  html.dark hr {
-    border-top-color: theme("colors.rule.dark");
   }
 
   @media (max-width: 640px) {

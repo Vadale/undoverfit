@@ -5,14 +5,14 @@ import Layout from "~/layouts/Layout.astro";
 <Layout title="Search" description="Search all posts on Undoverfit.">
   <section class="mx-auto w-full max-w-prose px-5">
     <h1 class="font-serif text-3xl">Search</h1>
-    <p class="mt-2 text-sm text-muted-light dark:text-muted-dark">
+    <p class="mt-2 text-sm text-ink-3">
       Full-text search across every post.
     </p>
 
     <div id="search" class="mt-8"></div>
     <p
       id="search-fallback"
-      class="mt-8 hidden text-sm text-muted-light dark:text-muted-dark"
+      class="mt-8 hidden text-sm text-ink-3"
     >
       Search is built at deploy time. In local dev, run <code>npm run build</code>
       to generate the index, then <code>npm run preview</code>.
@@ -61,19 +61,14 @@ import Layout from "~/layouts/Layout.astro";
 <style is:global>
   .pagefind-ui {
     --pagefind-ui-scale: 0.9;
-    --pagefind-ui-primary: theme("colors.ink.light");
-    --pagefind-ui-text: theme("colors.ink.light");
+    --pagefind-ui-primary: var(--ink);
+    --pagefind-ui-text: var(--ink);
     --pagefind-ui-background: transparent;
-    --pagefind-ui-border: theme("colors.rule.light");
+    --pagefind-ui-border: var(--rule);
     --pagefind-ui-tag: transparent;
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 0;
     --pagefind-ui-font: theme("fontFamily.sans");
-  }
-  html.dark .pagefind-ui {
-    --pagefind-ui-primary: theme("colors.ink.dark");
-    --pagefind-ui-text: theme("colors.ink.dark");
-    --pagefind-ui-border: theme("colors.rule.dark");
   }
   .pagefind-ui__search-input {
     background: transparent !important;

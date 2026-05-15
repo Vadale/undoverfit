@@ -15,11 +15,11 @@ const statusLabel: Record<string, string> = {
 <Layout title="Projects" description="Things I have built and things I am building.">
   <section class="mx-auto w-full max-w-prose px-5">
     <h1 class="font-serif text-3xl">Projects</h1>
-    <p class="mt-2 text-sm text-muted-light dark:text-muted-dark">
+    <p class="mt-2 text-sm text-ink-3">
       Things I have built and things I am building.
     </p>
 
-    <ul class="mt-10 divide-y divide-rule-light dark:divide-rule-dark">
+    <ul class="mt-10 divide-y divide-rule">
       {
         await Promise.all(
           projects.map(async (project) => {
@@ -35,11 +35,11 @@ const statusLabel: Record<string, string> = {
                   >
                     {project.data.title}
                   </a>
-                  <span class="shrink-0 text-sm text-muted-light dark:text-muted-dark tabular-nums">
+                  <span class="shrink-0 text-sm text-ink-3 tabular-nums">
                     {project.data.year}
                   </span>
                 </div>
-                <p class="mt-1 text-sm text-muted-light dark:text-muted-dark">
+                <p class="mt-1 text-sm text-ink-3">
                   {statusLabel[project.data.status]} · {project.data.description}
                 </p>
                 <div class="prose prose-sm prose-neutral dark:prose-invert font-serif max-w-none mt-3 text-[0.95rem]">

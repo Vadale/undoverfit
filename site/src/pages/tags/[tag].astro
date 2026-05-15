@@ -28,15 +28,15 @@ const { tag, posts } = Astro.props;
   description={`Posts on Undoverfit tagged with "${tag}".`}
 >
   <section class="mx-auto w-full max-w-prose px-5">
-    <p class="text-sm text-muted-light dark:text-muted-dark">
+    <p class="text-sm text-ink-3">
       <a href="/tags" class="no-underline hover:underline">← all tags</a>
     </p>
     <h1 class="mt-2 font-serif text-3xl">Tagged: {tag}</h1>
-    <p class="mt-2 text-sm text-muted-light dark:text-muted-dark">
+    <p class="mt-2 text-sm text-ink-3">
       {posts.length} post{posts.length === 1 ? "" : "s"}.
     </p>
 
-    <ul class="mt-10 divide-y divide-rule-light dark:divide-rule-dark">
+    <ul class="mt-10 divide-y divide-rule">
       {
         posts.map((post) => {
           const n = getPostNumber(post);
@@ -46,12 +46,12 @@ const { tag, posts } = Astro.props;
                 href={`/${n}`}
                 class="flex items-baseline gap-4 no-underline hover:underline decoration-1 underline-offset-4"
               >
-                <span class="w-10 shrink-0 text-sm text-muted-light dark:text-muted-dark tabular-nums">
+                <span class="w-10 shrink-0 text-sm text-ink-3 tabular-nums">
                   {String(n).padStart(2, "0")}
                 </span>
                 <span class="font-serif flex-1">{post.data.title}</span>
                 <time
-                  class="shrink-0 text-sm text-muted-light dark:text-muted-dark"
+                  class="shrink-0 text-sm text-ink-3"
                   datetime={post.data.pubDate.toISOString()}
                 >
                   {formatDate(post.data.pubDate)}

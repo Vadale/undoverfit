@@ -7,14 +7,47 @@ import ThemeToggle from "./ThemeToggle.astro";
   <div class="flex items-baseline justify-between gap-4">
     <a
       href="/"
-      class="font-serif text-3xl sm:text-4xl tracking-tight no-underline leading-none"
+      class="flex items-center gap-3 no-underline leading-none"
       aria-label="Undoverfit — home"
     >
-      Und<span class="italic font-normal text-accent-teal">over</span>fit
+      <svg
+        viewBox="0 0 100 32"
+        class="h-8 sm:h-9 w-auto shrink-0"
+        aria-hidden="true"
+      >
+        <!-- Underfit baseline -->
+        <line
+          x1="6" y1="16" x2="94" y2="16"
+          class="stroke-ink-2"
+          stroke-width="1"
+          stroke-opacity="0.9"
+          stroke-linecap="round"
+        />
+        <!-- Overfit curve -->
+        <path
+          d="M 14 18 Q 23 6 32 12 Q 41 22 50 20 Q 59 6 68 12 Q 77 20 86 16"
+          fill="none"
+          class="stroke-teal"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <!-- 5 data points -->
+        <g class="fill-paper stroke-ink" stroke-width="1.1">
+          <circle cx="14" cy="18" r="2.2" />
+          <circle cx="32" cy="12" r="2.2" />
+          <circle cx="50" cy="20" r="2.2" />
+          <circle cx="68" cy="12" r="2.2" />
+          <circle cx="86" cy="16" r="2.2" />
+        </g>
+      </svg>
+      <span class="font-serif text-3xl sm:text-4xl tracking-tight">
+        Und<span class="italic font-normal text-teal">over</span>fit
+      </span>
     </a>
     <ThemeToggle />
   </div>
-  <nav class="mt-4 text-sm text-muted-light dark:text-muted-dark">
+  <nav class="mt-4 text-sm text-ink-2">
     {
       NAV.map((item, i) => (
         <span>

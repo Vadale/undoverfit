@@ -8,10 +8,10 @@ const posts = await getPublishedPosts();
 <Layout title="Index" description="All posts on Undoverfit, newest first.">
   <section class="mx-auto w-full max-w-prose px-5">
     <h1 class="font-serif text-3xl">Index</h1>
-    <p class="mt-2 text-sm text-muted-light dark:text-muted-dark">
+    <p class="mt-2 text-sm text-ink-3">
       Every page is a post. Newest first.
     </p>
-    <ul class="mt-10 divide-y divide-rule-light dark:divide-rule-dark">
+    <ul class="mt-10 divide-y divide-rule">
       {
         posts.map((post) => {
           const n = getPostNumber(post);
@@ -21,12 +21,12 @@ const posts = await getPublishedPosts();
                 href={`/${n}`}
                 class="flex items-baseline gap-4 no-underline hover:underline decoration-1 underline-offset-4"
               >
-                <span class="w-10 shrink-0 text-sm text-muted-light dark:text-muted-dark tabular-nums">
+                <span class="w-10 shrink-0 text-sm text-ink-3 tabular-nums">
                   {String(n).padStart(2, "0")}
                 </span>
                 <span class="font-serif flex-1">{post.data.title}</span>
                 <time
-                  class="shrink-0 text-sm text-muted-light dark:text-muted-dark"
+                  class="shrink-0 text-sm text-ink-3"
                   datetime={post.data.pubDate.toISOString()}
                 >
                   {formatDate(post.data.pubDate)}

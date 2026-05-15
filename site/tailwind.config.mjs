@@ -7,26 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: {
-          light: "#ede4d0",
-          dark: "#0f1b2d",
-        },
-        ink: {
-          light: "#1a2738",
-          dark: "#d8dde3",
-        },
-        muted: {
-          light: "#9c8f7d",
-          dark: "#7989a0",
-        },
-        rule: {
-          light: "#d0c8b4",
-          dark: "#243245",
-        },
-        accent: {
-          navy: "#1a2738",
-          teal: "#4a7570",
-        },
+        paper: "var(--paper)",
+        ink: "var(--ink)",
+        "ink-2": "var(--ink-2)",
+        "ink-3": "var(--ink-3)",
+        teal: "var(--teal)",
+        rule: "var(--rule)",
       },
       fontFamily: {
         serif: ["Lora", "Georgia", "serif"],

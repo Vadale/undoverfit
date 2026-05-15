@@ -66,7 +66,7 @@ const { prev, next } = await getAdjacent(post);
       <h1 class="font-serif text-3xl leading-tight sm:text-4xl">
         {post.data.title}
       </h1>
-      <p class="mt-3 text-sm text-muted-light dark:text-muted-dark">
+      <p class="mt-3 text-sm text-ink-3">
         {post.data.location && <span>{post.data.location} · </span>}
         <time datetime={post.data.pubDate.toISOString()}>{date}</time>
         <span> · page {n}</span>
@@ -80,7 +80,7 @@ const { prev, next } = await getAdjacent(post);
     </div>
 
     {post.data.tags.length > 0 && (
-      <p class="mt-10 text-sm text-muted-light dark:text-muted-dark">
+      <p class="mt-10 text-sm text-ink-3">
         Tagged:{" "}
         {post.data.tags.map((t, i) => (
           <>
@@ -92,7 +92,7 @@ const { prev, next } = await getAdjacent(post);
     )}
 
     <nav
-      class="mt-16 flex items-center justify-between text-sm text-muted-light dark:text-muted-dark"
+      class="mt-16 flex items-center justify-between text-sm text-ink-3"
       aria-label="Post navigation"
     >
       {prev ? (
