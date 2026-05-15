@@ -33,20 +33,25 @@ html.dark {
 
   body {
     min-height: 100dvh;
-    font-size: 26px;
-    line-height: 1.75;
+    font-size: 30px;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   /* Tailwind typography's .prose resets font-size to 1rem (= 16px) on
      post content. Force it to match the site body size instead. */
-  .prose {
-    font-size: 25px;
+  .prose,
+  .prose p,
+  .prose li {
+    font-size: 30px !important;
+    line-height: 1.7 !important;
   }
   @media (min-width: 768px) {
-    .prose {
-      font-size: 26px;
+    .prose,
+    .prose p,
+    .prose li {
+      font-size: 32px !important;
     }
   }
 
@@ -91,7 +96,7 @@ html.dark {
 
   @media (max-width: 640px) {
     body {
-      font-size: 25px;
+      font-size: 28px;
     }
   }
 }
