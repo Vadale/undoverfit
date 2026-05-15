@@ -98,12 +98,72 @@ const ogImage = image
     </script>
   </head>
   <body>
-    <div class="fractal-bg" aria-hidden="true"></div>
+    <div id="bg-wrap" aria-hidden="true" transition:persist></div>
     <Header />
     <main class="fade-in">
       <slot />
     </main>
     <Footer />
     <Sounds />
+
+    <script is:inline>
+      (function () {
+        function buildHalftoneSvg(opts) {
+          const width = (opts && opts.width) || 1600;
+          const height = (opts && opts.height) || 1100;
+          const cell = (opts && opts.cell) || 12;
+          let s = (opts && opts.seed) || 23;
+          const rnd = () => {
+            s = (s * 9301 + 49297) % 233280;
+            return s / 233280;
+          };
+          const oct = [];
+          let a = 1, f = 0.0055;
+          for (let i = 0; i < 4; i++) {
+            oct.push({
+              a,
+              fx: f * (0.7 + rnd() * 0.6),
+              fy: f * (0.7 + rnd() * 0.6) * (rnd() > 0.5 ? 1 : -1),
+              ph: rnd() * Math.PI * 2,
+            });
+            a *= 0.55;
+            f *= 2.05;
+          }
+          const noise = (x, y) => {
+            let v = 0;
+            for (const o of oct) v += o.a * Math.sin(x * o.fx + y * o.fy + o.ph);
+            return (v / 1.8 + 1) / 2;
+          };
+          const maxR = cell * 0.55;
+          const cols = Math.ceil(width / cell) + 2;
+          const rows = Math.ceil(height / cell) + 2;
+          let dots = "";
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              const x = c * cell;
+              const y = r * cell;
+              let n = Math.pow(noise(x, y), 1.7);
+              const radius = 0.35 + n * maxR;
+              if (radius < 0.4) continue;
+              dots += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + radius.toFixed(2) + '"/>';
+            }
+          }
+          return '<svg class="halftone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" preserveAspectRatio="xMidYMid slice"><g fill="currentColor">' + dots + '</g></svg>';
+        }
+
+        function mountHalftone(opts) {
+          const node = document.getElementById("bg-wrap");
+          if (!node || node.dataset.mounted === "1") return;
+          node.dataset.mounted = "1";
+          const intensity = (opts && opts.intensity) || 1;
+          node.innerHTML = buildHalftoneSvg(opts) + '<div class="vignette"></div>';
+          const svg = node.querySelector("svg.halftone");
+          if (svg) svg.style.opacity = (0.06 * intensity).toFixed(3);
+        }
+
+        mountHalftone();
+        document.addEventListener("astro:after-swap", () => mountHalftone());
+      })();
+    </script>
   </body>
 </html>
