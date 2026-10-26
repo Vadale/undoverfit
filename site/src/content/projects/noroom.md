@@ -1,12 +1,11 @@
 ---
-title: "Noroom"
-description: "A data union that turns personal browsing data into collective leverage."
-url: "https://noroom.it"
+title: "NoRoom"
+description: "A privacy project spanning a browser extension, web services and tracker data."
 year: 2026
-status: "in-progress"
-featured: true
+status: "on-hold"
+featured: false
 ---
 
-Noroom is the project I spend most of my time on. The core idea: every person produces a stream of behavioral data on the web that is, individually, worth almost nothing — and collectively, worth billions. Today, all of that value flows in one direction. Noroom lets users pool their data, set the terms of access, and negotiate as a single counterparty.
+I conceived and led AI-assisted development of NoRoom: a browser extension, a web application, backend services and pipelines for tracker data. I worked on product priorities, the connections between those components, and aspects of the domain and authentication setup.
 
-Status: pre-launch. A Chrome extension, a backend, and a small early-user list. More on the blog soon.
+It began as an independent project with entrepreneurial aims, exploring privacy and greater user control over browsing data. The initiative is currently on hold. Its repositories are private; this entry describes the work rather than offering a service to sign up for.

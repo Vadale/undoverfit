@@ -26,9 +26,9 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    url: z.string().url(),
+    url: z.string().url().optional(),
     year: z.number().int(),
-    status: z.enum(["active", "archived", "in-progress"]),
+    status: z.enum(["active", "archived", "in-progress", "on-hold"]),
     featured: z.boolean().default(false),
   }),
 });
