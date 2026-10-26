@@ -9,6 +9,7 @@ const statusLabel: Record<string, string> = {
   active: "active",
   archived: "archived",
   "in-progress": "in progress",
+  "on-hold": "on hold",
 };
 ---
 
@@ -27,14 +28,18 @@ const statusLabel: Record<string, string> = {
             return (
               <li class="py-6">
                 <div class="flex items-baseline justify-between gap-4">
-                  <a
-                    href={project.data.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="font-serif text-lg no-underline hover:underline decoration-1 underline-offset-4"
-                  >
-                    {project.data.title}
-                  </a>
+                  {project.data.url ? (
+                    <a
+                      href={project.data.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-serif text-lg no-underline hover:underline decoration-1 underline-offset-4"
+                    >
+                      {project.data.title}
+                    </a>
+                  ) : (
+                    <span class="font-serif text-lg">{project.data.title}</span>
+                  )}
                   <span class="shrink-0 text-sm text-ink-3 tabular-nums">
                     {project.data.year}
                   </span>
