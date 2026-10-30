@@ -13,6 +13,17 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
+# Giscus loads these stylesheets from its own iframe with crossorigin="anonymous".
+[[headers]]
+  for = "/giscus-theme-light.css"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://giscus.app"
+
+[[headers]]
+  for = "/giscus-theme-dark.css"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://giscus.app"
+
 [[headers]]
   for = "/pagefind/*"
   [headers.values]

@@ -3,7 +3,7 @@
 
 html, body, main, [class*="gsc-"]:not([class*="-button"]):not([class*="-emoji"]):not([class*="-react"]):not(img):not(svg) {
   background-color: #f4f1e8 !important;
-  color: #0e2236 !important;
+  color: #171717 !important;
 }
 
 html, body {
@@ -18,7 +18,7 @@ main {
   --color-prettylights-syntax-string: #5a6878;
   --color-prettylights-syntax-keyword: #1b6e70;
 
-  --color-btn-text: #0e2236;
+  --color-btn-text: #171717;
   --color-btn-bg: #f4f1e8;
   --color-btn-border: rgba(14, 34, 54, 0.30);
   --color-btn-shadow: 0 0 transparent;
@@ -38,7 +38,7 @@ main {
 
   --color-action-list-item-default-hover-bg: rgba(14, 34, 54, 0.06);
 
-  --color-fg-default: #0e2236;
+  --color-fg-default: #171717;
   --color-fg-muted: #5a6878;
   --color-fg-subtle: #98a1ad;
 
@@ -69,7 +69,7 @@ main .markdown-body p,
 main .markdown-body li {
   font-size: 19px;
   line-height: 1.7;
-  color: #0e2236 !important;
+  color: #171717 !important;
 }
 
 main .markdown-body em,
