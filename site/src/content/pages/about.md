@@ -31,4 +31,6 @@ This blog is also a place to explain those decisions: what I kept, what I change
 
 You can browse my public work on [GitHub](https://github.com/Vadale), find my professional profile on [LinkedIn](https://www.linkedin.com/in/alessandro-vadal%C3%A0-851516180/), or email **vadale93 at gmail dot com**.
 
+For shorter posts and conversations, find me on [X](https://x.com/undoverfit), [Bluesky](https://bsky.app/profile/undoverfit.bsky.social) and [Threads](https://www.threads.com/@alevad_93). My LinkedIn posts are in English and Italian; the blog is in English.
+
 To follow the blog, add the [RSS feed](/rss.xml) to your reader. Comments on posts use [Giscus](https://giscus.app) and are public GitHub Discussions.
