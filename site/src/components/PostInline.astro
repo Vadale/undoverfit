@@ -17,8 +17,9 @@ const date = formatDate(post.data.pubDate);
   <header class="mb-10">
     <h2
       class="font-serif text-4xl font-medium leading-tight sm:text-5xl"
-      set:html={post.data.title}
-    />
+    >
+      <a href={`/${n}/`} class="no-underline" set:html={post.data.title} />
+    </h2>
     <div
       class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-sans text-[11px] uppercase tracking-[0.18em] text-ink-3"
     >
@@ -33,7 +34,7 @@ const date = formatDate(post.data.pubDate);
         <>
           <span aria-hidden="true" class="opacity-50">·</span>
           <a
-            href={`/${n}`}
+            href={`/${n}/`}
             class="inline-flex items-center rounded-full border border-current px-2 py-0.5 leading-none no-underline transition-colors hover:text-ink"
           >
             #{n}
@@ -46,7 +47,7 @@ const date = formatDate(post.data.pubDate);
           <span class="flex flex-wrap items-center gap-x-2">
             {post.data.tags.map((t) => (
               <a
-                href={`/tags/${tagSlug(t)}`}
+                href={`/tags/${tagSlug(t)}/`}
                 class="no-underline transition-colors hover:text-ink"
               >
                 #{t}

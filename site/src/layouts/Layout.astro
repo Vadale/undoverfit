@@ -14,6 +14,7 @@ interface Props {
   type?: "website" | "article";
   canonical?: string;
   pubDate?: Date;
+  noindex?: boolean;
 }
 
 const {
@@ -23,10 +24,15 @@ const {
   type = "website",
   canonical,
   pubDate,
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
-const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
+// Netlify serves HTML pages at directory URLs. File endpoints keep their suffixes.
+const pagePath = Astro.url.pathname.endsWith("/")
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+const url = canonical ?? new URL(pagePath, SITE.url).toString();
 const ogImage = image
   ? new URL(image, SITE.url).toString()
   : new URL("/og-default.png", SITE.url).toString();
@@ -40,6 +46,7 @@ const ogImage = image
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
     <link rel="canonical" href={url} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -51,11 +58,16 @@ const ogImage = image
     <meta property="og:description" content={description} />
     <meta property="og:url" content={url} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={title ?? `${SITE.name} — ${SITE.tagline}`} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title ?? SITE.name} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={title ?? `${SITE.name} — ${SITE.tagline}`} />
 
     {pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
 
@@ -66,14 +78,17 @@ const ogImage = image
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
       "name": SITE.name,
       "url": SITE.url,
       "description": SITE.description,
       "inLanguage": SITE.language,
       "author": {
         "@type": "Person",
+        "@id": `${SITE.url}/#author`,
         "name": SITE.author,
-        "url": `${SITE.url}/about`
+        "url": `${SITE.url}/about/`,
+        "sameAs": SITE.authorProfiles
       }
     })} />
 

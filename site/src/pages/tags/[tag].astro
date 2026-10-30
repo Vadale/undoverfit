@@ -29,7 +29,7 @@ const { tag, posts } = Astro.props;
 >
   <section class="mx-auto w-full max-w-prose px-5">
     <p class="text-sm text-ink-3">
-      <a href="/tags" class="no-underline hover:underline">← all tags</a>
+      <a href="/tags/" class="no-underline hover:underline">← all tags</a>
     </p>
     <h1 class="mt-2 font-serif text-3xl">Tagged: {tag}</h1>
     <p class="mt-2 text-sm text-ink-3">
@@ -43,7 +43,7 @@ const { tag, posts } = Astro.props;
           return (
             <li class="py-4">
               <a
-                href={`/${n}`}
+                href={`/${n}/`}
                 class="flex items-baseline gap-4 no-underline hover:underline decoration-1 underline-offset-4"
               >
                 <span class="w-10 shrink-0 text-sm text-ink-3 tabular-nums">
