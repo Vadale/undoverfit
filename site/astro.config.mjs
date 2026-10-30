@@ -9,10 +9,17 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap({
-      filter: (page) =>
-        !page.includes("/og/") &&
-        !page.includes("/og-default") &&
-        !page.includes("/rss"),
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return !["/search", "/search/", "/404", "/404/", "/404.html"].includes(path) &&
+          !path.startsWith("/og/") &&
+          !path.startsWith("/og-default") &&
+          !path.startsWith("/rss");
+      },
+      serialize: (item) => ({
+        ...item,
+        url: item.url.endsWith("/") ? item.url : `${item.url}/`,
+      }),
     }),
   ],
   build: {

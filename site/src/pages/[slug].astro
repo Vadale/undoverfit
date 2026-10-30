@@ -45,14 +45,16 @@ const { prev, next } = await getAdjacent(post);
     set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BlogPosting",
+      "@id": `${SITE.url}/${n}/#article`,
       "headline": plainTitle(post.data.title),
       "description": post.data.description,
       "datePublished": post.data.pubDate.toISOString(),
-      "url": `${SITE.url}/${n}`,
+      "url": `${SITE.url}/${n}/`,
       "image": `${SITE.url}/og/${n}.png`,
-      "author": { "@type": "Person", "name": SITE.author, "url": `${SITE.url}/about` },
-      "publisher": { "@type": "Person", "name": SITE.author },
-      "mainEntityOfPage": `${SITE.url}/${n}`,
+      "author": { "@type": "Person", "@id": `${SITE.url}/#author`, "name": SITE.author, "url": `${SITE.url}/about/` },
+      "publisher": { "@type": "Person", "@id": `${SITE.url}/#author`, "name": SITE.author },
+      "mainEntityOfPage": `${SITE.url}/${n}/`,
+      "isPartOf": { "@id": `${SITE.url}/#website` },
       "inLanguage": SITE.language,
       "keywords": post.data.tags.join(", ")
     })}
@@ -88,7 +90,7 @@ const { prev, next } = await getAdjacent(post);
             <span class="flex flex-wrap items-center gap-x-2">
               {post.data.tags.map((t) => (
                 <a
-                  href={`/tags/${tagSlug(t)}`}
+                  href={`/tags/${tagSlug(t)}/`}
                   class="no-underline transition-colors hover:text-ink"
                 >
                   #{t}
@@ -111,14 +113,14 @@ const { prev, next } = await getAdjacent(post);
       aria-label="Post navigation"
     >
       {prev ? (
-        <a href={`/${getPostNumber(prev)}`} class="no-underline hover:underline">
+        <a href={`/${getPostNumber(prev)}/`} class="no-underline hover:underline">
           ‹ page {getPostNumber(prev)}
         </a>
       ) : (
         <span></span>
       )}
       {next ? (
-        <a href={`/${getPostNumber(next)}`} class="no-underline hover:underline">
+        <a href={`/${getPostNumber(next)}/`} class="no-underline hover:underline">
           page {getPostNumber(next)} ›
         </a>
       ) : (

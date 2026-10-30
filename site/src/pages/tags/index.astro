@@ -19,7 +19,7 @@ const tags = await getAllTags();
         {tags.map((t) => (
           <li class="py-3">
             <a
-              href={`/tags/${t.slug}`}
+              href={`/tags/${t.slug}/`}
               class="flex items-baseline justify-between gap-4 no-underline hover:underline decoration-1 underline-offset-4"
             >
               <span class="font-serif">{t.tag}</span>
